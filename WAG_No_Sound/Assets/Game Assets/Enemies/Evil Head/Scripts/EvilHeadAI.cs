@@ -23,6 +23,8 @@ public class EvilHeadAI : Creature
     public AudioSource ChargeSound;
     public AudioSource TelegraphSound;
 
+    public List<AudioClip> BitesSounds;
+    public List<AudioClip> ChargeSounds;
     //public AK.Wwise.RTPC MovementRTPC;
     //public AK.Wwise.Event HoverSoundStart;
     //public AK.Wwise.Event HoverSoundEnd;
@@ -137,6 +139,7 @@ public class EvilHeadAI : Creature
         //print(Time.realtimeSinceStartup + ": ChargeTowardsPlayer");
         TelegraphSound.Stop();
         //!!TelegraphSound.Stop(gameObject,0, AkCurveInterpolation.AkCurveInterpolation_Linear);
+        ChargeSound.clip = ChargeSounds[Random.Range(0, 3)];
         ChargeSound.Play();
         //ChargeSound.Post(gameObject);
 
@@ -211,6 +214,8 @@ public class EvilHeadAI : Creature
     public void PlayBiteSound()
     {
         // BiteSound.Post(this.gameObject);
+
+        BiteSound.clip = BitesSounds[Random.Range((int)0, (int)3)];
         BiteSound.Play();
     }
 }
