@@ -12,8 +12,10 @@ public class PlayerMovement : MonoBehaviour
 {
 
     [Header("Wwise")]
-    public AK.Wwise.Event Footstep;
-    public AK.Wwise.RTPC MovementSpeed;
+    AudioSource audioSource;
+    public AudioClip Footstep;
+    //public AK.Wwise.Event Footstep;
+    //public AK.Wwise.RTPC MovementSpeed;
 
     //Movement variables
     [Header("Movement Variables")]
@@ -74,6 +76,8 @@ public class PlayerMovement : MonoBehaviour
             Instance.
             playerRb;
         animator = PlayerManager.Instance.playerAnimator;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -111,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 //TODO: Play landing sound here!
                 PlayerManager.Instance.playerCollider.material = frictionPhysMat;
+                audioSource.PlayOneShot(Footstep);
                 firstTimeLand = false;
             }
         }
@@ -155,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
         //Update the movementSpeed parameter in the animator
         animator.SetFloat(movementSpeedHash, runAmount);
         float RTPCValue = runAmount * 100f;
-        MovementSpeed.SetGlobalValue(RTPCValue);
+        //MovementSpeed.SetGlobalValue(RTPCValue);
     }
 
     void Sprint()
