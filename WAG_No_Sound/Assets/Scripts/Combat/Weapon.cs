@@ -12,14 +12,17 @@ using UnityEngine.Events;
 public class Weapon : MonoBehaviour, IInteractable
 {
     [Header("WWISE")]
-    public AK.Wwise.Event WeaponImpact = new AK.Wwise.Event();
-    public AK.Wwise.Switch WeaponTypeSwitch = new AK.Wwise.Switch();
+    //public AK.Wwise.Event WeaponImpact = new AK.Wwise.Event();
+    //public AK.Wwise.Switch WeaponTypeSwitch = new AK.Wwise.Switch();
+    public List<AudioClip> barrelImpact;
+    public List<AudioClip> boxImpact;
+    AudioSource audioSource;
 
     [Header("Combo Actions")]
     //public AK.Wwise.Event ComboEvent = new AK.Wwise.Event();
-    public AK.Wwise.State WeaponCombo1 = new AK.Wwise.State();
-    public AK.Wwise.State WeaponCombo2 = new AK.Wwise.State();
-    public AK.Wwise.State WeaponCombo3 = new AK.Wwise.State();
+    //public AK.Wwise.State WeaponCombo1 = new AK.Wwise.State();
+    //public AK.Wwise.State WeaponCombo2 = new AK.Wwise.State();
+    //public AK.Wwise.State WeaponCombo3 = new AK.Wwise.State();
     [Space(20f)]
 
     public WeaponTypes weaponType = WeaponTypes.Dagger;
@@ -105,6 +108,8 @@ public class Weapon : MonoBehaviour, IInteractable
         {
             Physics.IgnoreCollision(hitbox, PlayerManager.Instance.playerCollider);
         }
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void EquipWeapon()
@@ -167,35 +172,50 @@ public class Weapon : MonoBehaviour, IInteractable
                 if (currentAnimation.IsName("Player_RightSwing"))
                 {
                     attack.swingType = SwingTypes.Right;
-                    WeaponCombo1.SetValue();
+                    //WeaponCombo1.SetValue();
                 }
                 else if (currentAnimation.IsName("Player_LeftSwing"))
                 {
                     attack.swingType = SwingTypes.Left;
-                    WeaponCombo2.SetValue();
+                    //WeaponCombo2.SetValue();
                 }
                 else if (currentAnimation.IsName("Player_TopSwing"))
                 {
                     attack.swingType = SwingTypes.Top;
-                    WeaponCombo3.SetValue();
+                    //WeaponCombo3.SetValue();
                 }
 
                 if (!alreadyHitObjects.Contains(col.gameObject))
                 {
                     //get material of the contact point
                     SoundMaterial sm = col.gameObject.GetComponent<SoundMaterial>();
-                    if (sm != null) {
+                    if (sm != null)
+                    {
 
                         uint thisSwitch = 0;
                         //TODO WEAPONS
                         //AkSoundEngine.GetSwitch((uint)sm.material.GroupId, transform.parent.gameObject, out thisSwitch);
                         ////print("Current Switch: "+ thisSwitch +", New: "+ sm.material.ID);
 
-                        //if (thisSwitch != (uint)sm.material.Id)
-                        //{
-                        //    sm.material.SetValue(transform.parent.gameObject); // Set Impact Material
-                        //                                                       //print("New Impact Material: "+ sm.gameObject.name);
-                        //}
+                        switch (sm.walkType)
+                        {
+                            case WalkType.BARREL:
+                                    audioSource.PlayOneShot(barrelImpact[(int)weaponType - 1]);
+                                break;
+                            case WalkType.BOX:
+                                    audioSource.PlayOneShot(boxImpact[(int)weaponType - 1]);
+                                break;
+                            case WalkType.STONE:
+                            case WalkType.GRASS:
+                            case WalkType.DIRT:
+                            case WalkType.RUBBLE:
+                            case WalkType.SAND:
+                            case WalkType.WOOD:
+                            default:
+                                audioSource.Play();
+                                break;
+
+                        }
                     }
 
                     SetAndPlayWeaponImpact(col.gameObject);
@@ -227,16 +247,30 @@ public class Weapon : MonoBehaviour, IInteractable
             {
                 Attack attack = new Attack(BaseDamage, col.contacts[0].point - PlayerManager.Instance.player.transform.position, BaseDamage);
                 GameManager.DamageObject(col.gameObject, attack);
-                WeaponTypeSwitch.SetValue(transform.parent.gameObject); // Weapon Type
-                WeaponImpact.Post(transform.parent.gameObject);
+                //WeaponTypeSwitch.SetValue(transform.parent.gameObject); // Weapon Type
+                //WeaponImpact.Post(transform.parent.gameObject);
             }
         }
     }
     void SetAndPlayWeaponImpact(GameObject HitObj){
         //print("Impact");
         //WeaponTypeSwitch.SetValue(transform.parent.gameObject); // Weapon Type
+
+        switch(weaponType)
+        {
+            case WeaponTypes.Dagger:
+                {
+                    
+                }
+                break;
+            case WeaponTypes.Sword:
+                break;
+            case WeaponTypes.Axe:
+                break;
+        }
+
         alreadyHitObjects.Add(HitObj);
-        WeaponImpact.Post(transform.parent.gameObject);
+        //WeaponImpact.Post(transform.parent.gameObject);
 
     }
 

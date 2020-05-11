@@ -12,11 +12,15 @@ using UnityEngine.UI;
 public class CoinPickup : MonoBehaviour {
 
     public bool playSpawnSoundAtSpawn = true;
-    public AK.Wwise.Event spawnSound;
+    //public AK.Wwise.Event spawnSound;
+	public AudioClip spawnSound;
+	AudioSource audioSource;
 
 	void Start(){
+		audioSource = GetComponent<AudioSource>();
         if (playSpawnSoundAtSpawn){
-            spawnSound.Post(gameObject);
+			audioSource.PlayOneShot(spawnSound);
+            //spawnSound.Post(gameObject);
         }
 	}
 
