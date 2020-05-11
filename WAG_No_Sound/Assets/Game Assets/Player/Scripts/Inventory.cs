@@ -56,9 +56,12 @@ public class Inventory : MonoBehaviour
     public static bool InventoryIsOut = false;
 
     [Header("Wwise")]
-    public AK.Wwise.Event InventoryOpenedSound;
-    public AK.Wwise.Event InventoryClosedSound;
-    public AK.Wwise.Event InventorySelectSound;
+    //public AK.Wwise.Event InventoryOpenedSound;
+    //public AK.Wwise.Event InventoryClosedSound;
+    //public AK.Wwise.Event InventorySelectSound;
+    public AudioClip InventoryOpenedSound;
+    public AudioClip InventoryClosedSound;
+    public AudioClip InventorySelectSound;
 
     #region private variables
     private bool hasShown = false;
@@ -77,6 +80,11 @@ public class Inventory : MonoBehaviour
     private Image MarkerImage_Row2;
     private Image MarkerImage_Row3;
     #endregion
+
+    //Newly added variables
+    AudioSource audioSourceOpen;
+    AudioSource audioSourceClose;
+    AudioSource audioSourceSelect;
 
     private void OnDestroy()
     {
@@ -118,6 +126,13 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < 3; i++) { CanPressLefts.Add(false); }
         for (int i = 0; i < 3; i++) { CanPressRights.Add(false); }
+
+        audioSourceOpen = gameObject.AddComponent<AudioSource>();
+        audioSourceOpen.clip = InventoryOpenedSound;
+        audioSourceClose = gameObject.AddComponent<AudioSource>();
+        audioSourceClose.clip = InventoryClosedSound;
+        audioSourceSelect = gameObject.AddComponent<AudioSource>();
+        audioSourceSelect.clip = InventorySelectSound;
     }
 
     void MoveInventoryObjects(List<GameObject> Positions, List<GameObject> invRef, int incre, List<GameObject> StoreSpawns)
@@ -711,7 +726,8 @@ public class Inventory : MonoBehaviour
         if (!Menu.isOpen && DialogueManager.Instance.Dialogue.Count < 1 && !InventoryIsOut)
         {
             canvasGroup.interactable = true;
-            InventoryOpenedSound.Post(gameObject);
+            //InventoryOpenedSound.Post(gameObject);
+            audioSourceOpen.Play();
             InventoryIsOut = true;
             if (EventSystem.current != null)
             {
@@ -733,7 +749,8 @@ public class Inventory : MonoBehaviour
         if (InventoryIsOut)
         {
             canvasGroup.interactable = false;
-            InventoryClosedSound.Post(gameObject);
+            //InventoryClosedSound.Post(gameObject);
+            audioSourceClose.Play();
             InventoryIsOut = false;
             GameManager.Instance.gameSpeedHandler.UnPauseGameSpeed(gameObject.GetInstanceID());
 
@@ -789,7 +806,8 @@ public class Inventory : MonoBehaviour
 
     public void ButtonIncrement(int layer)
     {
-        InventorySelectSound.Post(gameObject);
+        //InventorySelectSound.Post(gameObject);
+        audioSourceSelect.Play();
 
         if (Panel.activeInHierarchy && hasShown)
         {
@@ -813,7 +831,8 @@ public class Inventory : MonoBehaviour
 
     public void InversedIncrement(int layer)
     {
-        InventorySelectSound.Post(gameObject);
+        //InventorySelectSound.Post(gameObject);
+        audioSourceSelect.Play();
         if (Panel.activeInHierarchy && hasShown)
         {
             if (layer == 0)
