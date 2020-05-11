@@ -16,9 +16,11 @@ public class Menu : MonoBehaviour
     public static MenuStateEvent OnMenuStateChange;
 
     [Header("Wwise")]
-    public AK.Wwise.RTPC MenuRTPC;
-    public AK.Wwise.Event MenuOpenSound;
-    public AK.Wwise.Event MenuCloseSound;
+    //public AK.Wwise.RTPC MenuRTPC;
+    //public AK.Wwise.Event MenuOpenSound;
+    //public AK.Wwise.Event MenuCloseSound;
+    public AudioClip MenuOpenSound;
+    public AudioClip MenuCloseSound;
 
     [Header("Other")]
     public AnimatedObjectActiveHandler ControlsBox;
@@ -28,6 +30,18 @@ public class Menu : MonoBehaviour
     public MenuEvent OnMenuDown;
 
     private bool menuOpen = false;
+
+    //Newly added variables
+    private AudioSource audioSourceOpen;
+    private AudioSource audioSourceClose;
+
+    public void Start()
+    {
+        audioSourceOpen = gameObject.AddComponent<AudioSource>();
+        audioSourceOpen.clip = MenuOpenSound;
+        audioSourceClose = gameObject.AddComponent<AudioSource>();
+        audioSourceClose.clip = MenuCloseSound;
+    }
 
     public void Update()
     {
@@ -54,8 +68,9 @@ public class Menu : MonoBehaviour
             isOpen = menuOpen;
             if (menuOpen)
             {
-                MenuOpenSound.Post(gameObject);
-                MenuRTPC.SetGlobalValue(100f);
+                //MenuOpenSound.Post(gameObject);
+                //MenuRTPC.SetGlobalValue(100f);
+                audioSourceOpen.Play();
                 GameManager.Instance.gameSpeedHandler.PauseGameSpeed(gameObject.GetInstanceID());
                 GameManager.Instance.BlurCam();
 
@@ -67,8 +82,9 @@ public class Menu : MonoBehaviour
             }
             else
             {
-                MenuCloseSound.Post(gameObject);
-                MenuRTPC.SetGlobalValue(0f);
+                //MenuCloseSound.Post(gameObject);
+                //MenuRTPC.SetGlobalValue(0f);
+                audioSourceClose.Play();
                 GameManager.Instance.gameSpeedHandler.UnPauseGameSpeed(gameObject.GetInstanceID());
                 GameManager.Instance.UnBlurCam();
                 QuestBox.DisableObject(0.25f);
