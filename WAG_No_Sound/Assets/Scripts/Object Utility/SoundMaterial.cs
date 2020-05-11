@@ -15,7 +15,9 @@ public enum WalkType
     SAND,
     STONE,
     WATER,
-    WOOD
+    WOOD,
+    BARREL,
+    BOX
 };
 
 public class SoundMaterial : MonoBehaviour

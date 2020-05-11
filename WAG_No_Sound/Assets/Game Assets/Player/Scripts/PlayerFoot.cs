@@ -43,7 +43,7 @@ public class PlayerFoot : MonoBehaviour
         {
             case WalkType.DIRT:
                 {
-                    if(PlayerManager.Instance.isSprinting)
+                    if(!PlayerManager.Instance.isSprinting)
                         rand = Random.Range(0, 5);
                     else
                         rand = Random.Range(6, footstepDirtSound.Count);
@@ -53,7 +53,7 @@ public class PlayerFoot : MonoBehaviour
                 break;
             case WalkType.GRASS:
                 {
-                    if (PlayerManager.Instance.isSprinting)
+                    if (!PlayerManager.Instance.isSprinting)
                         rand = Random.Range(0, 5);
                     else
                         rand = Random.Range(6, footstepGrassSound.Count);
@@ -63,7 +63,7 @@ public class PlayerFoot : MonoBehaviour
                 break;
             case WalkType.RUBBLE:
                 {
-                    if (PlayerManager.Instance.isSprinting)
+                    if (!PlayerManager.Instance.isSprinting)
                         rand = Random.Range(0, 5);
                     else
                         rand = Random.Range(6, footstepRubbleSound.Count);
@@ -73,7 +73,7 @@ public class PlayerFoot : MonoBehaviour
                 break;
             case WalkType.SAND:
                 {
-                    if (PlayerManager.Instance.isSprinting)
+                    if (!PlayerManager.Instance.isSprinting)
                         rand = Random.Range(0, 5);
                     else
                         rand = Random.Range(6, footstepSandSound.Count);
@@ -83,7 +83,7 @@ public class PlayerFoot : MonoBehaviour
                 break;
             case WalkType.STONE:
                 {
-                    if (PlayerManager.Instance.isSprinting)
+                    if (!PlayerManager.Instance.isSprinting)
                         rand = Random.Range(0, 5);
                     else
                         rand = Random.Range(6, footstepStoneSound.Count);
@@ -93,7 +93,7 @@ public class PlayerFoot : MonoBehaviour
                 break;
             case WalkType.WATER:
                 {
-                    if (PlayerManager.Instance.isSprinting)
+                    if (!PlayerManager.Instance.isSprinting)
                         rand = Random.Range(0, 5);
                     else
                         rand = Random.Range(6, footstepWaterSound.Count);
@@ -103,7 +103,7 @@ public class PlayerFoot : MonoBehaviour
                 break;
             case WalkType.WOOD:
                 {
-                    if (PlayerManager.Instance.isSprinting)
+                    if (!PlayerManager.Instance.isSprinting)
                         rand = Random.Range(0, 5);
                     else
                         rand = Random.Range(6, footstepWoodSound.Count);

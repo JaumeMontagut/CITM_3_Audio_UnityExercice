@@ -6,6 +6,7 @@
 
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace QuestSystem
@@ -19,9 +20,10 @@ namespace QuestSystem
         public event QuestEvent OnNewQuest;
         public event QuestEvent OnQuestCompleted;
 
-        public AK.Wwise.RTPC QuestlineProgressionRTPC;
-        public AK.Wwise.Event QuestlineCompleteEvent;
+        //public AK.Wwise.RTPC QuestlineProgressionRTPC;
+        //public AK.Wwise.Event QuestlineCompleteEvent;
         //public AK.Wwise.Event QuestlineAdvancedEvent;
+        public AudioClip QuestlineCompleteEvent;
 
         public bool StartQuestLineOnStart = true;
         public List<Quest> Quests;
@@ -33,12 +35,18 @@ namespace QuestSystem
         private IEnumerator interactionRoutine;
         #endregion
 
+        //Newly added variables
+        private AudioSource audioSourceComplete;
+
         private void Start()
         {
             if (StartQuestLineOnStart)
             {
                 InitializeQuest(currentQuestIdx);
             }
+
+            audioSourceComplete = gameObject.AddComponent<AudioSource>();
+            audioSourceComplete.clip = QuestlineCompleteEvent;
         }
 
         private Coroutine InitializeQuest(int questIdx)
@@ -59,7 +67,7 @@ namespace QuestSystem
                 OnNewQuest(currentQuest);
             }
 
-            QuestlineProgressionRTPC.SetGlobalValue(GetNormalizedQuestlineProgress() * 100f);
+            //QuestlineProgressionRTPC.SetGlobalValue(GetNormalizedQuestlineProgress() * 100f);
             initializingNewQuest = false;
         }
 
@@ -86,12 +94,14 @@ namespace QuestSystem
             currentQuestIdx++;
             if (currentQuestIdx < Quests.Count)
             {
-                QuestlineCompleteEvent.Post(gameObject);
+                //QuestlineCompleteEvent.Post(gameObject);
+                audioSourceComplete.Play();
                 InitializeQuest(currentQuestIdx);
             }
             else
             {
-                QuestlineCompleteEvent.Post(gameObject);
+                //QuestlineCompleteEvent.Post(gameObject);
+                audioSourceComplete.Play();
                 if (OnQuestlineComplete != null)
                 {
                     OnQuestlineComplete(this);

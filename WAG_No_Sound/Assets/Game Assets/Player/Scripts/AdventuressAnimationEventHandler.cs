@@ -191,6 +191,6 @@ public class AdventuressAnimationEventHandler : MonoBehaviour
     public void WeaponSound()
     {
         Weapon EquippedWeapon = PlayerManager.Instance.equippedWeaponInfo;
-        EquippedWeapon.WeaponImpact.Post(EquippedWeapon.transform.parent.gameObject);
+        //EquippedWeapon.WeaponImpact.Post(EquippedWeapon.transform.parent.gameObject);
     }
 }
