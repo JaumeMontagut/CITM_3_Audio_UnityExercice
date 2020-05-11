@@ -10,9 +10,13 @@ using System.Collections;
 public class AdventuressAnimationEventHandler : MonoBehaviour
 {
     [Header("Wwise")]
-    public AK.Wwise.Event Swing = new AK.Wwise.Event();
-    public AK.Wwise.Event GetItem = new AK.Wwise.Event();
-    public AK.Wwise.Trigger GetItemStinger = new AK.Wwise.Trigger();
+    private AudioSource audioSource;
+    public AudioClip Swing;
+    public AudioClip GetItem;
+
+    //public AK.Wwise.Event Swing = new AK.Wwise.Event();
+    //public AK.Wwise.Event GetItem = new AK.Wwise.Event();
+    //public AK.Wwise.Trigger GetItemStinger = new AK.Wwise.Trigger();
 
     [Header("Object Links")]
     [SerializeField]
@@ -85,21 +89,21 @@ public class AdventuressAnimationEventHandler : MonoBehaviour
 
                 if (side == FootSide.left )
                 {
-                    if (foot_L.FootstepSound.Validate())
-                    { 
+                    //if (foot_L.FootstepSound/*.Validate()*/)
+                    
                         foot_L.PlayFootstepSound();
                         particlePosition = foot_L.transform.position;
                         FootstepParticles(particlePosition);
-                    }
+                   
                 }
                 else
                 {
-                    if (foot_R.FootstepSound.Validate())
-                    {
+                    //if (foot_R.FootstepSound/*.Validate()*/)
+                    //{
                         foot_R.PlayFootstepSound();
                         particlePosition = foot_R.transform.position;
                         FootstepParticles(particlePosition);
-                    }
+                   
                 }
             }
         }
@@ -140,9 +144,10 @@ public class AdventuressAnimationEventHandler : MonoBehaviour
     public void Weapon_SwingEvent()
     {
         // PLAY SOUND
-        Weapon W = PlayerManager.Instance.equippedWeaponInfo;
-        W.WeaponTypeSwitch.SetValue(PlayerManager.Instance.weaponSlot);
-        Swing.Post(PlayerManager.Instance.weaponSlot);
+        audioSource.PlayOneShot(Swing);
+        //Weapon W = PlayerManager.Instance.equippedWeaponInfo;
+        //W.WeaponTypeSwitch.SetValue(PlayerManager.Instance.weaponSlot);
+        //Swing.Post(PlayerManager.Instance.weaponSlot);
     }
 
     public void PauseMovement()
@@ -177,9 +182,10 @@ public class AdventuressAnimationEventHandler : MonoBehaviour
 
     public void PickUpItem()
     {
-        PlayerManager.Instance.PickUpEvent();
-        GetItem.Post(this.gameObject);
-        GetItemStinger.Post(GameManager.Instance.MusicGameObject);
+        audioSource.PlayOneShot(GetItem);
+        //PlayerManager.Instance.PickUpEvent();
+        //GetItem.Post(this.gameObject);
+        //GetItemStinger.Post(GameManager.Instance.MusicGameObject);
     }
 
     public void WeaponSound()

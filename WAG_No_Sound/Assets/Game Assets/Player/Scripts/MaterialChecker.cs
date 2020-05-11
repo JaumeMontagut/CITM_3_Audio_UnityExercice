@@ -39,14 +39,14 @@ public class MaterialChecker : MonoBehaviour
         {
             SoundMaterial sm = hit.collider.gameObject.GetComponent<SoundMaterial>();
 
-            if (sm != null)
-            {
-                sm.material.SetValue(go);
-            }
+            //if (sm != null)
+            //{
+            //    sm.material.SetValue(go);
+            //}
         }
     }
 
-    public AK.Wwise.Switch GetMaterial()
+    public WalkType GetMaterial()
     {
         if (Physics.Raycast(trn.position + checkOffset, direction, out hit, layermask))
         {
@@ -54,10 +54,10 @@ public class MaterialChecker : MonoBehaviour
 
             if (sm != null)
             {
-                return sm.material;
+                return sm.walkType;
             }
         }
-        return null;
+        return WalkType.DIRT;
     }
 
 }
