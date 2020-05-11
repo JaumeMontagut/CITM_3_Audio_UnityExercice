@@ -518,6 +518,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1560987515}
   - component: {fileID: 1560987514}
+  - component: {fileID: 2119333286}
   m_Layer: 8
   m_Name: MovementRTPC
   m_TagString: Untagged
@@ -626,6 +627,31 @@ AudioSource:
     - serializedVersion: 3
       time: 0
       value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!169 &2119333286
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560987513}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.22727273
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5893,6 +5919,14 @@ MonoBehaviour:
   BiteSound: {fileID: 359682289}
   ChargeSound: {fileID: 438516907}
   TelegraphSound: {fileID: 252723298}
+  BitesSounds:
+  - {fileID: 8300000, guid: 45989dbbaef48284a80a9f5eb2027bb1, type: 3}
+  - {fileID: 8300000, guid: bd49cb62331a77f449ce82ffe6d1fce5, type: 3}
+  - {fileID: 8300000, guid: bd6f28c286e026a45beec58eaf136ec6, type: 3}
+  ChargeSounds:
+  - {fileID: 8300000, guid: d0b22e94a7dcaa240983f58c42b8824d, type: 3}
+  - {fileID: 8300000, guid: 35aa306a8af42d44fb6db53fe3f8a110, type: 3}
+  - {fileID: 8300000, guid: 55a97102d119efe4f88bab9b6400a744, type: 3}
 --- !u!195 &195276050817526538
 NavMeshAgent:
   m_ObjectHideFlags: 0
