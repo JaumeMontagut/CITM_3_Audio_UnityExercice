@@ -6,12 +6,13 @@
 
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class AdventuressAnimationEventHandler : MonoBehaviour
 {
     [Header("Wwise")]
     private AudioSource audioSource;
-    public AudioClip Swing;
+    public List<AudioClip> swingAudios;
     public AudioClip GetItem;
 
     //public AK.Wwise.Event Swing = new AK.Wwise.Event();
@@ -53,6 +54,8 @@ public class AdventuressAnimationEventHandler : MonoBehaviour
         {
             print("Right foot missing");
         }
+
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -144,8 +147,17 @@ public class AdventuressAnimationEventHandler : MonoBehaviour
     public void Weapon_SwingEvent()
     {
         // PLAY SOUND
-        audioSource.PlayOneShot(Swing);
-        //Weapon W = PlayerManager.Instance.equippedWeaponInfo;
+
+        Weapon W = PlayerManager.Instance.equippedWeaponInfo;
+        int random;
+
+        if (W.weaponAnimationType == WeaponAnimationTypes.OneHanded)
+            random = Random.Range(0, 5);
+        else
+            random = Random.Range(5, swingAudios.Count);
+
+        if(Random.Range(0,3) != 0)
+            audioSource.PlayOneShot(swingAudios[random]);
         //W.WeaponTypeSwitch.SetValue(PlayerManager.Instance.weaponSlot);
         //Swing.Post(PlayerManager.Instance.weaponSlot);
     }
