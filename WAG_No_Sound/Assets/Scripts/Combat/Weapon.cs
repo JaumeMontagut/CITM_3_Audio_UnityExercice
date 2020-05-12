@@ -120,7 +120,7 @@ public class Weapon : MonoBehaviour, IInteractable
     public void EquipWeapon()
     {
         // destroy the pickup script 
-        SetPickupEnabled(false);
+        //SetPickupEnabled(false);
 
         prefab.transform.position = PlayerManager.Instance.weaponSlot.transform.position;
         prefab.transform.rotation = PlayerManager.Instance.weaponSlot.transform.rotation;

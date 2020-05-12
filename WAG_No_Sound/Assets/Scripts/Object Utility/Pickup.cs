@@ -7,6 +7,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
 public class Pickup : MonoBehaviour, IInteractable
 {
@@ -27,9 +28,11 @@ public class Pickup : MonoBehaviour, IInteractable
 	public SphereCollider trigger;
 
 	[Header("Wwise")]
-	public AK.Wwise.Event PickUpEvent;
-	[Space(15f)]
-	public AK.Wwise.Switch PickupType;
+	//public AK.Wwise.Event PickUpEvent;
+	AudioSource audioSource;
+	public List<AudioClip> pickUpAudio;
+	//[Space(15f)]
+	//public AK.Wwise.Switch PickupType;
 
 	#region private variables
 	private float randomOffset;
@@ -47,11 +50,12 @@ public class Pickup : MonoBehaviour, IInteractable
 	void Start()
 	{
 		randomOffset = Random.Range(0, 2 * Mathf.PI);
+		audioSource = GetComponent<AudioSource>();
 	}
 
 	void OnEnable()
 	{
-        PickupType.SetValue(gameObject);
+        //PickupType.SetValue(gameObject);
         if (transform.childCount > 0)
 		{
 			Transform T = transform.Find("Outline");
@@ -191,8 +195,10 @@ public class Pickup : MonoBehaviour, IInteractable
 
 			if (interactionSound)
 			{
-				
-				PickUpEvent.Post(gameObject);
+				audioSource.Play();
+				int random = Random.Range(0, pickUpAudio.Count);
+				audioSource.PlayOneShot(pickUpAudio[random]);
+				//PickUpEvent.Post(gameObject);
 			}
 			if (pickupParticles != null)
 			{
