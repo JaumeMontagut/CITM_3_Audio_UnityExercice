@@ -16,6 +16,11 @@ public class Weapon : MonoBehaviour, IInteractable
     //public AK.Wwise.Switch WeaponTypeSwitch = new AK.Wwise.Switch();
     public List<AudioClip> barrelImpact;
     public List<AudioClip> boxImpact;
+    public List<AudioClip> stoneImpact;
+    public List<AudioClip> woodImpact;
+    public List<AudioClip> dirtImpact;
+    public List<AudioClip> grassImpact;
+    public List<AudioClip> attacksSound;
     AudioSource audioSource;
 
     [Header("Combo Actions")]
@@ -168,6 +173,9 @@ public class Weapon : MonoBehaviour, IInteractable
                 Vector3 playerToHitPoint = col.contacts[0].point - PlayerManager.Instance.player.transform.position;
                 Attack attack = new Attack(BaseDamage, playerToHitPoint, knockbackStrength, SwingTypes.None, weaponType, col.contacts[0].point);
 
+                int rand_attack = Random.Range(0, 2);
+                int rand_light_sound = Random.Range(0, 5);
+                int rand_heavy_sound = Random.Range(6, attacksSound.Count);
                 AnimatorStateInfo currentAnimation = PlayerManager.Instance.playerAnimator.GetCurrentAnimatorStateInfo(0);
                 if (currentAnimation.IsName("Player_RightSwing"))
                 {
@@ -206,11 +214,37 @@ public class Weapon : MonoBehaviour, IInteractable
                                     audioSource.PlayOneShot(boxImpact[(int)weaponType - 1]);
                                 break;
                             case WalkType.STONE:
-                            case WalkType.GRASS:
+                                if(weaponType == WeaponTypes.Sword)
+                                    audioSource.PlayOneShot(stoneImpact[1]);
+                                else if (weaponType == WeaponTypes.Axe)
+                                    audioSource.PlayOneShot(stoneImpact[2]);
+                                else
+                                    audioSource.PlayOneShot(stoneImpact[0]);
+                                break;
+                            case WalkType.WOOD:
+                                if (weaponType == WeaponTypes.Sword)
+                                    audioSource.PlayOneShot(woodImpact[1]);
+                                else
+                                    audioSource.PlayOneShot(woodImpact[0]);
+                                break;
                             case WalkType.DIRT:
+                                if (weaponType == WeaponTypes.Sword)
+                                    audioSource.PlayOneShot(dirtImpact[1]);
+                                else if (weaponType == WeaponTypes.Axe)
+                                    audioSource.PlayOneShot(dirtImpact[2]);
+                                else
+                                    audioSource.PlayOneShot(dirtImpact[0]);
+                                break;
+                            case WalkType.GRASS:
+                                if (weaponType == WeaponTypes.Sword)
+                                    audioSource.PlayOneShot(grassImpact[1]);
+                                else if (weaponType == WeaponTypes.Axe)
+                                    audioSource.PlayOneShot(grassImpact[2]);
+                                else
+                                    audioSource.PlayOneShot(grassImpact[0]);
+                                break;
                             case WalkType.RUBBLE:
                             case WalkType.SAND:
-                            case WalkType.WOOD:
                             default:
                                 audioSource.Play();
                                 break;

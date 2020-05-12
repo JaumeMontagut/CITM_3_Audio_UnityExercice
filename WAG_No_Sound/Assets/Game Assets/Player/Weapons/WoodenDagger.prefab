@@ -63,6 +63,21 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5959e63f03b12b943b1cc53121aff377, type: 3}
   - {fileID: 8300000, guid: d52d8c036efbec447912de6dbd1a01b8, type: 3}
   - {fileID: 8300000, guid: 44338789933cf6742bf76b472da0e4f8, type: 3}
+  stoneImpact:
+  - {fileID: 8300000, guid: 79a3e8fd02ae4624cbbbbf6a2f17e1f3, type: 3}
+  - {fileID: 8300000, guid: 2df6de5d82eda494fb427cef4106b8d2, type: 3}
+  - {fileID: 8300000, guid: 154669b1d57ec9f4aa085714fc51f584, type: 3}
+  woodImpact:
+  - {fileID: 8300000, guid: fe9ae3f23bc49514083c8c26e5abcf7e, type: 3}
+  - {fileID: 8300000, guid: 859cb3eb52519ad4d8566569ddd9deda, type: 3}
+  dirtImpact:
+  - {fileID: 8300000, guid: f4712bd3e0dbbfd4aaac59c457ce1cd9, type: 3}
+  - {fileID: 8300000, guid: 66492049cd802734ea2e7f76261a3f18, type: 3}
+  - {fileID: 8300000, guid: 33e3939565485824ea4f741b92ed080d, type: 3}
+  grassImpact:
+  - {fileID: 8300000, guid: 69af20faf869e9e48b2f88789645c66a, type: 3}
+  - {fileID: 8300000, guid: 43e75398b16d10748bd7c0bdc413f06a, type: 3}
+  - {fileID: 8300000, guid: 01407d69af472c84ea10ba14fa948b7d, type: 3}
   weaponType: 1
   weaponAnimationType: 0
   equipped: 0
@@ -186,7 +201,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2d3f66f5363863c459b07e0b49ca23a4, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
