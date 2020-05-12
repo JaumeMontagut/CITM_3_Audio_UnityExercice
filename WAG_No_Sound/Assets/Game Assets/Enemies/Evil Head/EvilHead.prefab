@@ -52,7 +52,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -87,7 +87,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -179,7 +179,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -214,7 +214,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -306,7 +306,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -341,7 +341,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -433,7 +433,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -468,7 +468,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -561,7 +561,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -596,7 +596,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -713,7 +713,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -748,7 +748,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -5808,13 +5808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d194b927782944d2ca81f0d00674450b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material:
-    idInternal: 1216965916
-    valueGuidInternal: d5bb20b355a0b146b459ce4924b0299e
-    groupIdInternal: -230521123
-    groupGuidInternal: c8ce850565410c458f907f1fc8884a30
-    WwiseObjectReference: {fileID: 11400000, guid: a6c0fc96c4cb2f14b825dc3636924179,
-      type: 2}
+  walkType: 0
 --- !u!114 &114430652048464346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10926,34 +10920,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49bbb0657c59a4f78a7d975cb1e30519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponImpact:
-    idInternal: 0
-    valueGuidInternal: 00000000000000000000000000000000
-    WwiseObjectReference: {fileID: 0}
-  WeaponTypeSwitch:
-    idInternal: 0
-    valueGuidInternal: 00000000000000000000000000000000
-    groupIdInternal: 0
-    groupGuidInternal: 00000000000000000000000000000000
-    WwiseObjectReference: {fileID: 0}
-  WeaponCombo1:
-    idInternal: 0
-    valueGuidInternal: 00000000000000000000000000000000
-    groupIdInternal: 0
-    groupGuidInternal: 00000000000000000000000000000000
-    WwiseObjectReference: {fileID: 0}
-  WeaponCombo2:
-    idInternal: 0
-    valueGuidInternal: 00000000000000000000000000000000
-    groupIdInternal: 0
-    groupGuidInternal: 00000000000000000000000000000000
-    WwiseObjectReference: {fileID: 0}
-  WeaponCombo3:
-    idInternal: 0
-    valueGuidInternal: 00000000000000000000000000000000
-    groupIdInternal: 0
-    groupGuidInternal: 00000000000000000000000000000000
-    WwiseObjectReference: {fileID: 0}
+  barrelImpact: []
+  boxImpact: []
+  stoneImpact: []
+  woodImpact: []
+  dirtImpact: []
+  grassImpact: []
+  attacksSound: []
   weaponType: 1
   weaponAnimationType: 0
   equipped: 0
