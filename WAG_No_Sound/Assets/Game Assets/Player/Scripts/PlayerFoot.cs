@@ -33,6 +33,8 @@ public class PlayerFoot : MonoBehaviour
             walkType = materialChecker.GetMaterial();
             //materialChecker.CheckMaterial(gameObject); //This also sets the material if a SoundMaterial is found!
         }
+        else
+            walkType = WalkType.WATER;
 
         if (audioSource == null)
             audioSource = GetComponent<AudioSource>();
