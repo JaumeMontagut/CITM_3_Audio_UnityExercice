@@ -20,11 +20,14 @@ public class PlayerManager : Singleton<PlayerManager>
     protected PlayerManager() { }
 
     [Header("-- Wwise --")]
-    public AK.Wwise.Event Health = new AK.Wwise.Event();
+    public List<AudioClip> hurtSound;
+    public List<AudioClip> deathSound;
+    public AudioSource audioSource;
+    //public AK.Wwise.Event Health = new AK.Wwise.Event();
     public AK.Wwise.Trigger Death = new AK.Wwise.Trigger();
     public AK.Wwise.RTPC HealthLevel = new AK.Wwise.RTPC();
     public AK.Wwise.RTPC RegenerationLevel = new AK.Wwise.RTPC();
-    public AK.Wwise.Event HurtSound = new AK.Wwise.Event();
+    //public AK.Wwise.Event HurtSound = new AK.Wwise.Event();
 
     [Header("Player Information")]
     public bool isAlive;
@@ -121,6 +124,8 @@ public class PlayerManager : Singleton<PlayerManager>
             playerStartPosition = player.transform.position;
             SetupPlayerConnections();
         }
+
+        audioSource = player.GetComponent<AudioSource>();
 
         StartCoroutine(Regen());
 
@@ -228,7 +233,7 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         while (true)
         {
-            HealthLevel.SetGlobalValue(Mathf.Min(HealthOfPlayer, 100));
+            //HealthLevel.SetGlobalValue(Mathf.Min(HealthOfPlayer, 100));
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -236,7 +241,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     IEnumerator Regen()
     {
-        Health.Post(this.gameObject);
+        //Health.Post(this.gameObject);
         StartCoroutine(AkHealthStatus());
         while (true)
         {
@@ -290,10 +295,13 @@ public class PlayerManager : Singleton<PlayerManager>
         if (!Immortal)
         {
             HealthOfPlayer -= a.damage;
-            HurtSound.Post(player);
+            int rand = Random.Range(0, hurtSound.Count);
+            audioSource.PlayOneShot(hurtSound[rand]);
             StopRegen();
             if (HealthOfPlayer < 0f)
             {
+                int random = Random.Range(0, deathSound.Count);
+                audioSource.PlayOneShot(deathSound[random]);
                 Respawn();
                 playerAnimator.SetBool(isAliveHash, false);
                 if (a.damage > 20f)
