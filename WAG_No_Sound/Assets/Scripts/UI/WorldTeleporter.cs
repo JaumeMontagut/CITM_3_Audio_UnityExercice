@@ -17,7 +17,8 @@ public class WorldTeleporter : MonoBehaviour
     private TeleportDestination[] destinations;
 
     [Header("Wwise")]
-    public AK.Wwise.Event TeleportSelectSound;
+    //public AK.Wwise.Event TeleportSelectSound;
+    public AudioSource TeleportSelectSound;
 
     [Header("UI Objects")]
     public Dropdown dropdown;
@@ -78,7 +79,8 @@ public class WorldTeleporter : MonoBehaviour
         if (dropdown.value != 0)
         {
             PlayerManager.Instance.player.transform.position = destinations[dropdown.value - 1].transform.position;
-            TeleportSelectSound.Post(PlayerManager.Instance.player);
+            //TeleportSelectSound.Post(PlayerManager.Instance.player);
+            GetComponent<AudioSource>().Play();
             dropdown.value = 0;
             dropdown.captionText.text = LanguageManager.GetText("menu_teleport");
 
