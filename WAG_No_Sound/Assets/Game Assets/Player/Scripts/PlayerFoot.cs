@@ -37,7 +37,7 @@ public class PlayerFoot : MonoBehaviour
             walkType = WalkType.WATER;
 
         if (audioSource == null)
-            audioSource = GetComponent<AudioSource>();
+            audioSource = PlayerManager.Instance.audioSource;
 
         int rand;
 

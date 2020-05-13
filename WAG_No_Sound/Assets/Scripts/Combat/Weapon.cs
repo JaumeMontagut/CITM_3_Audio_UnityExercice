@@ -114,7 +114,7 @@ public class Weapon : MonoBehaviour, IInteractable
             Physics.IgnoreCollision(hitbox, PlayerManager.Instance.playerCollider);
         }
 
-        audioSource = GetComponent<AudioSource>();
+        audioSource = PlayerManager.Instance.audioSource;
     }
 
     public void EquipWeapon()
