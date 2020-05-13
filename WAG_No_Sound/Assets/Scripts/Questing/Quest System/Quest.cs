@@ -24,7 +24,7 @@ namespace QuestSystem
         [Header("Quest Info")]
         public string TitleKey;
         public string DescriptionKey;
-        public AK.Wwise.Bank QuestBank;
+        //public AK.Wwise.Bank QuestBank;
         public bool UnloadBankOnComplete = true;
         public bool ClearDialogueOnCompletion = true;
 
@@ -49,7 +49,7 @@ namespace QuestSystem
 
         public Coroutine InitializeQuest()
         {
-            QuestBank.Load();
+            //QuestBank.Load();
             return StartCoroutine(QuestInitialization());
         }
 
@@ -67,7 +67,7 @@ namespace QuestSystem
         {
             if (UnloadBankOnComplete)
             {
-            QuestBank.Unload();
+            //QuestBank.Unload();
             }
             if (ClearDialogueOnCompletion)
             {
