@@ -26,6 +26,14 @@ public class PlayerFoot : MonoBehaviour
     private bool inWater;
     #endregion
 
+    //Newly added variables
+    private PlayerMovement playerMovement;
+
+    private void Start()
+    {
+        playerMovement = FindObjectOfType<PlayerMovement>();
+    }
+
     public void PlayFootstepSound()
     {
         if (!inWater)
@@ -50,7 +58,7 @@ public class PlayerFoot : MonoBehaviour
                     else
                         rand = Random.Range(6, footstepDirtSound.Count);
 
-                    audioSource.PlayOneShot(footstepDirtSound[rand]);
+                    audioSource.PlayOneShot(footstepDirtSound[rand], playerMovement.GetVolumeBySpeed(0.3f));
                 }
                 break;
             case WalkType.GRASS:
@@ -60,7 +68,7 @@ public class PlayerFoot : MonoBehaviour
                     else
                         rand = Random.Range(6, footstepGrassSound.Count);
 
-                    audioSource.PlayOneShot(footstepGrassSound[rand]);
+                    audioSource.PlayOneShot(footstepGrassSound[rand], playerMovement.GetVolumeBySpeed(0.3f));
                 }
                 break;
             case WalkType.RUBBLE:
@@ -70,7 +78,7 @@ public class PlayerFoot : MonoBehaviour
                     else
                         rand = Random.Range(6, footstepRubbleSound.Count);
 
-                    audioSource.PlayOneShot(footstepRubbleSound[rand]);
+                    audioSource.PlayOneShot(footstepRubbleSound[rand], playerMovement.GetVolumeBySpeed(0.3f));
                 }
                 break;
             case WalkType.SAND:
@@ -80,7 +88,7 @@ public class PlayerFoot : MonoBehaviour
                     else
                         rand = Random.Range(6, footstepSandSound.Count);
 
-                    audioSource.PlayOneShot(footstepSandSound[rand]);
+                    audioSource.PlayOneShot(footstepSandSound[rand], playerMovement.GetVolumeBySpeed(0.3f));
                 }
                 break;
             case WalkType.STONE:
@@ -90,7 +98,7 @@ public class PlayerFoot : MonoBehaviour
                     else
                         rand = Random.Range(6, footstepStoneSound.Count);
 
-                    audioSource.PlayOneShot(footstepStoneSound[rand]);
+                    audioSource.PlayOneShot(footstepStoneSound[rand], playerMovement.GetVolumeBySpeed(0.3f));
                 }
                 break;
             case WalkType.WATER:
@@ -100,7 +108,7 @@ public class PlayerFoot : MonoBehaviour
                     else
                         rand = Random.Range(6, footstepWaterSound.Count);
 
-                    audioSource.PlayOneShot(footstepWaterSound[rand]);
+                    audioSource.PlayOneShot(footstepWaterSound[rand], playerMovement.GetVolumeBySpeed(0.3f));
                 }
                 break;
             case WalkType.WOOD:
@@ -110,7 +118,7 @@ public class PlayerFoot : MonoBehaviour
                     else
                         rand = Random.Range(6, footstepWoodSound.Count);
 
-                    audioSource.PlayOneShot(footstepWoodSound[rand]);
+                    audioSource.PlayOneShot(footstepWoodSound[rand], playerMovement.GetVolumeBySpeed(0.3f));
                 }
                 break;
         }

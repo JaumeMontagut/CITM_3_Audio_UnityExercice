@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 //TODO: Play landing sound here!
                 PlayerManager.Instance.playerCollider.material = frictionPhysMat;
-                audioSource.PlayOneShot(Footstep);
+                audioSource.PlayOneShot(Footstep, GetVolumeBySpeed(0.3f));
                 firstTimeLand = false;
             }
         }
@@ -136,7 +136,10 @@ public class PlayerMovement : MonoBehaviour
             NavMeshHit hit;
             if (NavMesh.SamplePosition(transform.position, out hit, navMeshCheckDistance, LayerMask.NameToLayer("Ground"))) //Limit to using the NavMesh
             {
-                playerBody.velocity = new Vector3((movementVector.x * (maxSpeed + sprintAdd)) * Time.fixedDeltaTime * 20f * speedModifier, playerBody.velocity.y + (movementVector.y * Time.deltaTime), (movementVector.z * (maxSpeed + sprintAdd)) * Time.fixedDeltaTime * 20f * speedModifier); //NORMAL MOVEMENT
+                playerBody.velocity = new Vector3(
+                    (movementVector.x * (maxSpeed + sprintAdd)) * Time.fixedDeltaTime * 20f * speedModifier,
+                    playerBody.velocity.y + (movementVector.y * Time.deltaTime),
+                    (movementVector.z * (maxSpeed + sprintAdd)) * Time.fixedDeltaTime * 20f * speedModifier); //NORMAL MOVEMENT
             }
         }
 
@@ -249,5 +252,18 @@ public class PlayerMovement : MonoBehaviour
         InputManager.OnMoveUp -= OnMoveUp;
         InputManager.OnSprint -= Sprint;
         InputManager.OnSprintUp -= StopSprint;
+    }
+
+    public float GetVolumeBySpeed(float minVolume)
+    {
+        Debug.Log(minVolume + GetSpeedPercent() * (1f - minVolume));
+        return minVolume + GetSpeedPercent() * (1f - minVolume);
+    }
+
+    //Newly added methods
+    public float GetSpeedPercent()
+    {
+        float currSpeed = maxSpeed + sprintAdd;
+        return (currSpeed / sprintSpeed);
     }
 }
