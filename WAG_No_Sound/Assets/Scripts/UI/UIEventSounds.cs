@@ -24,7 +24,7 @@ public class UIEventSounds : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void Start()
     {
-        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -45,7 +45,7 @@ public class UIEventSounds : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public void OnPointerExit(PointerEventData eventData)
     {
         //OnPointerExitSound.Post(gameObject);
-        audioSource.PlayOneShot(OnPointerExitSound);
+        //audioSource.PlayOneShot(OnPointerExitSound);
     }
 
     public void OnPointerUp(PointerEventData eventData)
