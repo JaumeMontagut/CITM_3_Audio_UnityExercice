@@ -22,6 +22,7 @@ public class Weapon : MonoBehaviour, IInteractable
     public List<AudioClip> grassImpact;
     public List<AudioClip> attacksSound;
     AudioSource audioSource;
+    AudioSource bumpAudioSource;
 
     [Header("Combo Actions")]
     //public AK.Wwise.Event ComboEvent = new AK.Wwise.Event();
@@ -115,6 +116,7 @@ public class Weapon : MonoBehaviour, IInteractable
         }
 
         audioSource = PlayerManager.Instance.audioSource;
+        bumpAudioSource = GetComponent<AudioSource>();
     }
 
     public void EquipWeapon()
@@ -246,7 +248,7 @@ public class Weapon : MonoBehaviour, IInteractable
                             case WalkType.RUBBLE:
                             case WalkType.SAND:
                             default:
-                                audioSource.Play();
+                                bumpAudioSource.Play();
                                 break;
 
                         }
@@ -289,19 +291,6 @@ public class Weapon : MonoBehaviour, IInteractable
     void SetAndPlayWeaponImpact(GameObject HitObj){
         //print("Impact");
         //WeaponTypeSwitch.SetValue(transform.parent.gameObject); // Weapon Type
-
-        switch(weaponType)
-        {
-            case WeaponTypes.Dagger:
-                {
-                    
-                }
-                break;
-            case WeaponTypes.Sword:
-                break;
-            case WeaponTypes.Axe:
-                break;
-        }
 
         alreadyHitObjects.Add(HitObj);
         //WeaponImpact.Post(transform.parent.gameObject);
