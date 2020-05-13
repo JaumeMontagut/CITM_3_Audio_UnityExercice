@@ -24,6 +24,7 @@ namespace QuestSystem
         //public AK.Wwise.Event QuestlineCompleteEvent;
         //public AK.Wwise.Event QuestlineAdvancedEvent;
         public AudioClip QuestlineCompleteEvent;
+        public AudioClip QuestlineAdvancedEvent;
 
         public bool StartQuestLineOnStart = true;
         public List<Quest> Quests;
@@ -36,7 +37,7 @@ namespace QuestSystem
         #endregion
 
         //Newly added variables
-        private AudioSource audioSourceComplete;
+        private AudioSource audioSource;
 
         private void Start()
         {
@@ -45,8 +46,7 @@ namespace QuestSystem
                 InitializeQuest(currentQuestIdx);
             }
 
-            audioSourceComplete = gameObject.AddComponent<AudioSource>();
-            audioSourceComplete.clip = QuestlineCompleteEvent;
+            audioSource = gameObject.GetComponent<AudioSource>();
         }
 
         private Coroutine InitializeQuest(int questIdx)
@@ -95,13 +95,13 @@ namespace QuestSystem
             if (currentQuestIdx < Quests.Count)
             {
                 //QuestlineCompleteEvent.Post(gameObject);
-                audioSourceComplete.Play();
+                audioSource.PlayOneShot(QuestlineCompleteEvent);
                 InitializeQuest(currentQuestIdx);
             }
             else
             {
                 //QuestlineCompleteEvent.Post(gameObject);
-                audioSourceComplete.Play();
+                audioSource.PlayOneShot(QuestlineAdvancedEvent);
                 if (OnQuestlineComplete != null)
                 {
                     OnQuestlineComplete(this);
