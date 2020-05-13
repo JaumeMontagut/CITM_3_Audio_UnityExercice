@@ -272,7 +272,8 @@ MonoBehaviour:
   InteractionEnabled: 1
   interactionSound: 1
   trigger: {fileID: 135000012609768788}
-  pickUpAudio: []
+  pickUpAudio:
+  - {fileID: 8300000, guid: b2a86f10850f52445943b4e0db582593, type: 3}
   OnBecameFocus:
     m_PersistentCalls:
       m_Calls: []
@@ -409,7 +410,8 @@ AudioSource:
   m_GameObject: {fileID: 1000014038255978}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -1246572340024900067, guid: e301af34e1bda9d4088ed91017948abe,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 2d3f66f5363863c459b07e0b49ca23a4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

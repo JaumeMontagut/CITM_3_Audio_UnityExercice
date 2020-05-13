@@ -78,6 +78,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 69af20faf869e9e48b2f88789645c66a, type: 3}
   - {fileID: 8300000, guid: 43e75398b16d10748bd7c0bdc413f06a, type: 3}
   - {fileID: 8300000, guid: 01407d69af472c84ea10ba14fa948b7d, type: 3}
+  attacksSound: []
   weaponType: 1
   weaponAnimationType: 0
   equipped: 0
@@ -199,7 +200,8 @@ AudioSource:
   m_GameObject: {fileID: 1205291966342024}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -1246572340024900067, guid: e301af34e1bda9d4088ed91017948abe,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 2d3f66f5363863c459b07e0b49ca23a4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

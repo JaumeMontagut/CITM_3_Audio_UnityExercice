@@ -20,42 +20,37 @@ public class UIEventSounds : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public AudioClip OnPointerEnterSound;
     public AudioClip OnPointerExitSound;
 
-    private AudioSource audioSourceDown;
-    private AudioSource audioSourceUp;
-    private AudioSource audioSourceEnter;
-    private AudioSource audioSourceExit;
+    private AudioSource audioSource;
 
     public void Start()
     {
-        audioSourceDown = gameObject.AddComponent<AudioSource>();
-        audioSourceDown.clip = OnPointerDownSound;
-        audioSourceUp = gameObject.AddComponent<AudioSource>();
-        audioSourceEnter = gameObject.AddComponent<AudioSource>();
-        audioSourceExit = gameObject.AddComponent<AudioSource>();
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         //OnPointerDownSound.Post(gameObject);
-        audioSourceDown.Play();
+        audioSource.PlayOneShot(OnPointerDownSound);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         //OnPointerEnterSound.Post(gameObject);
-        if(!audioSourceEnter.isPlaying)
-            audioSourceEnter.PlayOneShot(OnPointerEnterSound);
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(OnPointerEnterSound);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         //OnPointerExitSound.Post(gameObject);
-        audioSourceExit.Play();
+        //audioSource.PlayOneShot(OnPointerExitSound);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         //OnPointerUpSound.Post(gameObject);
-        audioSourceUp.Play();
+        audioSource.PlayOneShot(OnPointerUpSound);
     }
 }
