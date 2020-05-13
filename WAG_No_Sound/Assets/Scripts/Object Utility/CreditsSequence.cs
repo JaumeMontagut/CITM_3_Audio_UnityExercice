@@ -26,19 +26,19 @@ public class CreditsSequence : MonoBehaviour
 
     [Header("Other")]
     public GameObject FadeCanvas;
-
-    public AK.Wwise.Event MusicEvent;
-    public AK.Wwise.Bank SoundBank;
+    public AudioSource loopSong;
 
     #region private variables
     private Animator canvAnim;
     private PlayerCamera camScript;
     private readonly int fadeOutHash = Animator.StringToHash("FadeOut");
+    public float totalTime = 0;
     #endregion
+   
 
     private void Awake()
     {
-        SoundBank.Load(false, false);
+        //SoundBank.Load(false, false);
     }
 
     void Start()
@@ -55,13 +55,20 @@ public class CreditsSequence : MonoBehaviour
         canvAnim = FadeCanvas.GetComponent<Animator>();
 
         StartCoroutine(CreditsCameraSequence());
-        MusicEvent.Post(gameObject);
+        //MusicEvent.Post(gameObject);
+        loopSong = GetComponent<AudioSource>();
+        if(loopSong)
+            StartCoroutine(FadeAudioSource.StartFade(loopSong, 5, 0, totalTime));
     }
-
+    private void Update()
+    {
+     
+    }
     IEnumerator CreditsCameraSequence()
     {
         for (int i = 0; i < CameraSequence.Count; i++)
         {
+          
             CameraBlock c = CameraSequence[i];
             camScript.ChangeCamera(new PlayerCamera.CameraEvent(c.cam.GetComponent<Camera>(), c.transitionTime, c.holdTime, false));
 
@@ -79,7 +86,8 @@ public class CreditsSequence : MonoBehaviour
                 CanvasGroup g = c.UIObjectsToFadeOut[j].GetComponent<CanvasGroup>();
                 StartCoroutine(FadeOutUIElement(g));
             }
-
+           
+           
             yield return new WaitForSeconds(c.holdTime + c.transitionTime);
 
             if (i == CameraSequence.Count - 2)
@@ -118,7 +126,9 @@ public class CreditsSequence : MonoBehaviour
 
     private void OnDestroy()
     {
-        MusicEvent.Stop(gameObject);
+        //MusicEvent.Stop(gameObject);
+        if(loopSong)
+            StartCoroutine(FadeAudioSource.StartFade(loopSong, 0, 0,0));
         InputManager.OnMenuDown -= SkipCredits;
     }
 }
