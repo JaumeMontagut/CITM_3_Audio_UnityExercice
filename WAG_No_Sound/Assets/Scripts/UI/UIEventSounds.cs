@@ -43,7 +43,8 @@ public class UIEventSounds : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public void OnPointerEnter(PointerEventData eventData)
     {
         //OnPointerEnterSound.Post(gameObject);
-        audioSourceEnter.Play();
+        if(!audioSourceEnter.isPlaying)
+            audioSourceEnter.PlayOneShot(OnPointerEnterSound);
     }
 
     public void OnPointerExit(PointerEventData eventData)
