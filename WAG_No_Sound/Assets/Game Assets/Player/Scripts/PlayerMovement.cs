@@ -256,7 +256,6 @@ public class PlayerMovement : MonoBehaviour
 
     public float GetVolumeBySpeed(float minVolume)
     {
-        Debug.Log(minVolume + GetSpeedPercent() * (1f - minVolume));
         return minVolume + GetSpeedPercent() * (1f - minVolume);
     }
 
